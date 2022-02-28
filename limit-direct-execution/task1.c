@@ -24,7 +24,7 @@ int main(){
     /*--------------------------------------------------------------------------------------------------------*/
     int fd1[2]; 
     int fd2[2];
-    
+    /*Conceptually, a pipe is a connection between two processes*/
     if (pipe(fd1) == -1 || pipe(fd2) == -1)
     {
         fprintf(stderr, "Pipe Failed");
@@ -32,7 +32,11 @@ int main(){
     }
     int rc = fork();
 
-    
+    /*
+    fd[0] will be the fd(file descriptor) for the 
+    read end of pipe.
+    fd[1] will be the fd for the write end of pipe.
+    */
     if (rc < 0)
     {
         fprintf(stderr, "error");
@@ -57,21 +61,12 @@ int main(){
         printf("Cтоимость контекстного переключения в микросекундах %f \n", (end.tv_usec - start.tv_usec) / (float)loops);
     }
     
-    
-    
-
     return 0;
 }
 
 /*
-Conceptually, a pipe is a connection between two processes
 Parameters :
-fd[0] will be the fd(file descriptor) for the 
-read end of pipe.
-fd[1] will be the fd for the write end of pipe.
-Returns : 0 on Success.
--1 on error.
 Output:
 Cтоимость системного вызова в микросекундах 0.072000
-
+Cтоимость системного вызова в микросекундах 0.061000
 */
